@@ -40,4 +40,12 @@ def user_login(request):
 
 
 def profile(request):
-    return render(request, './profile.html', {'user': request.user})
+    if request.user.is_authenticated:
+        return render(request, './profile.html', {'user': request.user})
+    else:
+        return redirect('login')
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('login')
