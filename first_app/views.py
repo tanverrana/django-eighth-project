@@ -58,24 +58,28 @@ def user_logout(request):
 
 
 def pass_change(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(user=request.user, data=request.POST)
-        if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, request.user)
-            return redirect('profile')
-    else:
-        form = PasswordChangeForm(user=request.user)
-    return render(request, './pass_change.html', {'form': form})
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = PasswordChangeForm(user=request.user, data=request.POST)
+            if form.is_valid():
+                form.save()
+                update_session_auth_hash(request, form.user)
+                return redirect('profile')
+        else:
+            form = PasswordChangeForm(user=request.user)
+        return render(request, './pass_change.html', {'form': form})
+    return redirect('signup')
 
 
 def pass_change2(request):
-    if request.method == 'POST':
-        form = SetPasswordForm(user=request.user, data=request.POST)
-        if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, request.user)
-            return redirect('profile')
-    else:
-        form = SetPasswordForm(user=request.user)
-    return render(request, './pass_change.html', {'form': form})
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = SetPasswordForm(user=request.user, data=request.POST)
+            if form.is_valid():
+                form.save()
+                update_session_auth_hash(request, form.user)
+                return redirect('profile')
+        else:
+            form = SetPasswordForm(user=request.user)
+        return render(request, './pass_change.html', {'form': form})
+    return redirect('signup')
