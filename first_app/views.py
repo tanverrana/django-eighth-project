@@ -14,4 +14,4 @@ def home(request):
     else:
         form = RegisterForm()
 
-    return render(request, './home.html', {'form': form})
+    return render(request, './signup.html', {'form': form})
