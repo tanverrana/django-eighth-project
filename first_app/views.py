@@ -36,7 +36,7 @@ def user_login(request):
                 return redirect('profile')  # redirect profile page
     else:
         form = AuthenticationForm()
-        return render(request, './login.html', {'form': form})
+    return render(request, './login.html', {'form': form})
 
 
 def profile(request):
