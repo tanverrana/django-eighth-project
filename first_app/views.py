@@ -5,5 +5,11 @@ from .forms import RegisterForm
 
 
 def home(request):
-    form = RegisterForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save(commit=False)
+    else:
+        form = RegisterForm()
+
     return render(request, './home.html', {'form': form})

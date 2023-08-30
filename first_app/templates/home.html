@@ -16,8 +16,14 @@
 <body>
     <h1>Home Page!</h1>
     {% load crispy_forms_tags %}
-    <form action="" style="width: 50%; margin:auto">
-        {{form|crispy}}
+    <form method="post" style="width: 50%; margin:auto" novalidate>
+        {% csrf_token %}
+        <!-- {{form|crispy}} -->
+        {% for fm in form %}
+        {{fm.label_tag}}
+        {{fm}}
+        {{fm.errors|striptags}}
+        {% endfor %}
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 
