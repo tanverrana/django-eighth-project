@@ -5,6 +5,10 @@ from django.contrib import messages
 
 
 def home(request):
+    return render(request, './home.html')
+
+
+def signup(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
