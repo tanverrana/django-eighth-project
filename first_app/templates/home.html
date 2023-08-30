@@ -11,9 +11,23 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Home!</title>
+    <style>
+        .success {
+            color: white;
+            background-color: green;
+        }
+    </style>
 </head>
 
 <body>
+    {% if messages %}
+    <div>
+        {% for m in messages %}
+        <small {% if m.tags %} class="{{m.tags}}" {% endif %}>{{m}}</small>
+        {% endfor %}
+
+    </div>
+    {% endif %}
     <h1>Home Page!</h1>
     {% load crispy_forms_tags %}
     <form method="post" style="width: 50%; margin:auto" novalidate>
